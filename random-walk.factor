@@ -57,7 +57,7 @@ M: walk-window draw-gadget* [ n random-walk ] init draw-canvas ;
 
 M: walk-window pref-dim* drop { $ width $ height } ;
 
-MAIN-WINDOW: win { { title "Maze" } }
+MAIN-WINDOW: win { { title "Random walk" } }
     <walk-window> >>gadgets ;
 
 MAIN: win
