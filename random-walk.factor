@@ -24,8 +24,7 @@ SYMBOL: walk-counter
 : draw-line ( -- ) 
     GL_LINE_STRIP glBegin
     x get y get
-    x get 3 random 1 - +
-    y get 3 random 1 - +
+    x get y get [ 3 random 1 - + ] bi@
     4dup
     [ glVertex2d ] 2bi@
     y set x set 2drop
