@@ -5,6 +5,22 @@ USING: kernel math math.order accessors ui ui.gadgets ui.gadgets.canvas
        namespaces literals ui.pixel-formats prettyprint ;
 IN: random-walk
 
+
+! insert-sort
+: is_greatest ( seq elt -- new_seq )
+    swap
+    2dup [ < ] with find drop over length or swap insert-nth
+;
+
+: ins-sort ( seq -- seq seq )
+    dup
+    { }
+    swap
+    [
+        is_greatest
+    ] each
+;
+
 CONSTANT: width         400
 CONSTANT: height        400
 CONSTANT: line-width    3
