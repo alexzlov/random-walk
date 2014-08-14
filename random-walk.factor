@@ -31,6 +31,7 @@ CONSTANT: line-width    3
     1.0 1.0 1.0 1.0 glColor4d
 ;
 
+! TODO: make animated random-walk
 : draw-line ( n x y -- n' x' y' ) 
     GL_LINE_STRIP glBegin
     2dup
