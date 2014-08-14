@@ -44,12 +44,16 @@ SYMBOL: walk-counter
     walk-counter get 1 + walk-counter set 
 ;
 
+! TODO: get rid off walk-counter as symbol
 : main-loop ( -- )
     0 walk-counter set
-    width 2 / height 2 / 
+    ! starting from the center
+    width 2 / height 2 /
+    ! main loop                
     [ walk-counter get 100000 < ]
     [ draw-line ]
     while
+    ! cleaning
     2drop
 ;
 
