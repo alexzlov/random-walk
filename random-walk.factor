@@ -25,15 +25,13 @@ CONSTANT: width         400
 CONSTANT: height        400
 CONSTANT: line-width    3
 
-SYMBOL: walk-counter
-
 : init ( -- )  
     line-width 2 - glLineWidth
     line-width 2 - glPointSize
     1.0 1.0 1.0 1.0 glColor4d
 ;
 
-: draw-line ( x y -- x' y' ) 
+: draw-line ( n x y -- n' x' y' ) 
     GL_LINE_STRIP glBegin
     2dup
     [ 3 random 1 - + ] bi@
@@ -41,20 +39,20 @@ SYMBOL: walk-counter
     [ glVertex2d ] 2bi@
     [ 2drop ] 2dip
     glEnd
-    walk-counter get 1 + walk-counter set 
+    [ 1 + ] 2dip
 ;
 
-! TODO: get rid off walk-counter as symbol
 : main-loop ( -- )
-    0 walk-counter set
+    ! init counter
+    0
     ! starting from the center
     width 2 / height 2 /
     ! main loop                
-    [ walk-counter get 100000 < ]
+    [ [ dup 10000 < ] 2dip rot ]
     [ draw-line ]
     while
     ! cleaning
-    2drop
+    3drop
 ;
 
 : random-walk ( n -- ) 
