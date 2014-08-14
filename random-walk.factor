@@ -25,34 +25,32 @@ CONSTANT: width         400
 CONSTANT: height        400
 CONSTANT: line-width    3
 
-SYMBOL: x
-SYMBOL: y
 SYMBOL: walk-counter
 
-: init ( -- ) 
-    width 2 /i x set 
-    height 2 /i y set 
+: init ( -- )  
     line-width 2 - glLineWidth
     line-width 2 - glPointSize
     1.0 1.0 1.0 1.0 glColor4d
 ;
 
-: draw-line ( -- ) 
+: draw-line ( x y -- x' y' ) 
     GL_LINE_STRIP glBegin
-    x get y get
-    x get y get [ 3 random 1 - + ] bi@
+    2dup
+    [ 3 random 1 - + ] bi@
     4dup
     [ glVertex2d ] 2bi@
-    y set x set 2drop
+    [ 2drop ] 2dip
     glEnd
     walk-counter get 1 + walk-counter set 
 ;
 
 : main-loop ( -- )
-    0 walk-counter set 
+    0 walk-counter set
+    width 2 / height 2 / 
     [ walk-counter get 100000 < ]
     [ draw-line ]
-    while 
+    while
+    2drop
 ;
 
 : random-walk ( n -- ) 
