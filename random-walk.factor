@@ -1,8 +1,11 @@
 ! Copyright (C) 2014 Your name.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: kernel math math.order accessors ui ui.gadgets ui.gadgets.canvas 
-       ui.render opengl.gl random sequences io fry arrays 
-       namespaces literals ui.pixel-formats prettyprint ;
+USING:  kernel              math                math.order 
+        accessors           ui                  ui.gadgets 
+        ui.gadgets.canvas   ui.render           opengl.gl 
+        random              sequences           io 
+        fry                 arrays              namespaces 
+        literals            ui.pixel-formats    prettyprint ;
 IN: random-walk
 
 
@@ -32,7 +35,7 @@ CONSTANT: line-width    3
 ;
 
 ! TODO: make animated random-walk
-: draw-line ( n x y -- n' x' y' ) 
+: draw-line ( x y -- x' y' ) 
     GL_LINE_STRIP glBegin
     2dup
     [ 3 random 1 - + ] bi@
@@ -40,7 +43,6 @@ CONSTANT: line-width    3
     [ glVertex2d ] 2bi@
     [ 2drop ] 2dip
     glEnd
-    [ 1 + ] 2dip
 ;
 
 : main-loop ( -- )
@@ -50,7 +52,11 @@ CONSTANT: line-width    3
     width 2 / height 2 /
     ! main loop                
     [ [ dup 10000 < ] 2dip rot ]
-    [ draw-line ]
+    [ 
+        draw-line 
+        ! increment counter
+        [ 1 + ] 2dip 
+    ]
     while
     ! cleaning
     3drop
@@ -61,7 +67,7 @@ CONSTANT: line-width    3
     main-loop
 ;
 
-TUPLE: walk-window < canvas ;
+TUPLE: walk-window < canvas paused ;
 
 : <walk-window> ( -- gadget ) walk-window new-canvas ;
 
