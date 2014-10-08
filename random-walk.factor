@@ -67,7 +67,7 @@ CONSTANT: line-width    3
     main-loop
 ;
 
-TUPLE: walk-window < canvas paused ;
+TUPLE: walk-window < canvas ;
 
 : <walk-window> ( -- gadget ) walk-window new-canvas ;
 
