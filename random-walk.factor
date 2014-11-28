@@ -8,22 +8,6 @@ USING:  kernel              math                math.order
         literals            ui.pixel-formats    prettyprint ;
 IN: random-walk
 
-
-! insert-sort
-: is_greatest ( seq elt -- new_seq )
-    swap
-    2dup [ < ] with find drop over length or swap insert-nth
-;
-
-: ins-sort ( seq -- seq seq )
-    dup
-    { }
-    swap
-    [
-        is_greatest
-    ] each
-;
-
 CONSTANT: width         400
 CONSTANT: height        400
 CONSTANT: line-width    3
@@ -34,7 +18,8 @@ CONSTANT: line-width    3
     1.0 1.0 1.0 1.0 glColor4d
 ;
 
-! TODO: make animated random-walk
+! @TODO: make animated random-walk
+! @TODO: Another approach: make lazy array of random steps
 : draw-line ( x y -- x' y' ) 
     GL_LINE_STRIP glBegin
     2dup

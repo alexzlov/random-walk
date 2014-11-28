@@ -1,7 +1,7 @@
 USING: tools.deploy.config ;
 H{
     { deploy-c-types? t }
-    { deploy-help? f }
+    { deploy-help? t }
     { deploy-name "random-walk" }
     { "stop-after-last-window?" t }
     { deploy-unicode? t }
